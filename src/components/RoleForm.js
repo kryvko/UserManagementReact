@@ -5,23 +5,21 @@ export default class RoleForm extends Component {
 
     state = {
         name: ''
-    };
+    }
 
     handleChange = event => {
-       this.setState({[event.target.name]: event.target.value})
+        this.setState({name: event.currentTarget.value});
     };
 
-
     handleSubmit = event => {
-      event.preventDefault();
-      const { name } = this.state;
-      this.props.onSubmit({ name });
+        event.preventDefault();
+        this.props.onSubmit(this.state);
     };
 
     componentWillReceiveProps(nextProps) {
-        if ( nextProps.role ) {
-            const name  = nextProps.role.name;
-            this.setState({ name });
+        if (nextProps.role) {
+            const { id, name } = nextProps.role;
+            this.setState({ id, name });
         }
     }
 
@@ -29,8 +27,8 @@ export default class RoleForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <TextField name="name" onChange={this.handleChange} value={this.state.name} hintText="Role Name"/>
-                    <FlatButton primary={true} type={"submit"}>Save</FlatButton>
+                    <TextField name="name" hintText="Role Name" onChange={this.handleChange} value={this.state.name}/>
+                    <FlatButton type={"submit"}>Save</FlatButton>
                 </form>
             </div>
         );

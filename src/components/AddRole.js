@@ -10,7 +10,7 @@ export default class AddRole extends Component {
 
     handleSave = role => {
         fetch('http://localhost:8080/UserManagement/roles', {
-            method: 'POST',
+            method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),

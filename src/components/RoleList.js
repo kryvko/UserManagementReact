@@ -18,9 +18,20 @@ export default class RoleList extends Component {
             .then(data => this.setState({roles: data}));
     };
 
+    handleDelete = id => {
+        fetch(`http://localhost:8080/UserManagement/roles?ID=${id}`, {
+           method: 'delete'
+        })
+            .then( resp => {
+                if( resp.ok ) {
+                    this.fetchAll();
+                }
+            });
+    };
+
     render() {
         let roles = this.state.roles.map(role =>
-            <Role role={role} key={role.id}/>
+            <Role role={role} key={role.id} onDelete={this.handleDelete}/>
         );
         return (
             <div>
@@ -29,6 +40,7 @@ export default class RoleList extends Component {
                     <TableRow>
                         <TableHeaderColumn>ID</TableHeaderColumn>
                         <TableHeaderColumn>NAME</TableHeaderColumn>
+                        <TableHeaderColumn>ACTION</TableHeaderColumn>
                     </TableRow>
                     </TableHeader>
                     <TableBody>

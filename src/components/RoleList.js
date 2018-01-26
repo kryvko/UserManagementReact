@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Role} from './Role'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow} from 'material-ui'
+import {restHost} from "../resources/properties";
 
 
 export default class RoleList extends Component {
@@ -13,17 +14,17 @@ export default class RoleList extends Component {
     }
 
     fetchAll = () => {
-        fetch('http://localhost:8080/UserManagement/roles')
+        fetch(`${restHost}/roles`)
             .then(resp => resp.json())
             .then(data => this.setState({roles: data}));
     };
 
     handleDelete = id => {
-        fetch(`http://localhost:8080/UserManagement/roles?ID=${id}`, {
-           method: 'delete'
+        fetch(`${restHost}/roles?ID=${id}`, {
+            method: 'delete'
         })
-            .then( resp => {
-                if( resp.ok ) {
+            .then(resp => {
+                if (resp.ok) {
                     this.fetchAll();
                 }
             });
@@ -37,11 +38,11 @@ export default class RoleList extends Component {
             <div>
                 <Table>
                     <TableHeader displaySelectAll={false}>
-                    <TableRow>
-                        <TableHeaderColumn>ID</TableHeaderColumn>
-                        <TableHeaderColumn>NAME</TableHeaderColumn>
-                        <TableHeaderColumn>ACTION</TableHeaderColumn>
-                    </TableRow>
+                        <TableRow>
+                            <TableHeaderColumn>ID</TableHeaderColumn>
+                            <TableHeaderColumn>NAME</TableHeaderColumn>
+                            <TableHeaderColumn>ACTION</TableHeaderColumn>
+                        </TableRow>
                     </TableHeader>
                     <TableBody>
                         {roles}

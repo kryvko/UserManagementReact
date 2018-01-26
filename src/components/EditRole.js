@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RoleForm from "./RoleForm";
 import { Redirect } from 'react-router-dom'
+import { restHost} from "../resources/properties";
 
 export default class EditRole extends Component {
 
@@ -11,14 +12,14 @@ export default class EditRole extends Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        fetch(`http://localhost:8080/UserManagement/roles?ID=${id}`)
+        fetch(`${restHost}/roles?ID=${id}`)
             .then(resp => resp.json())
             .then(data => this.setState({ role: data }));
     }
 
     handleSave = role => {
         const id = this.props.match.params.id;
-        fetch(`http://localhost:8080/UserManagement/roles?ID=${id}`, {
+        fetch(`${restHost}/roles?ID=${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'

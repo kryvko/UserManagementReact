@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from  'react-router-dom'
 import RoleForm from './RoleForm'
+import { restHost } from "../resources/properties";
 
 export default class AddRole extends Component {
 
@@ -9,7 +10,7 @@ export default class AddRole extends Component {
     };
 
     handleSave = role => {
-        fetch('http://localhost:8080/UserManagement/roles', {
+        fetch(`${restHost}/roles`, {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json'

@@ -6,5 +6,6 @@ export const Header = () => (
     <header>
         <Link to="/roles"><FlatButton>Roles</FlatButton></Link>
         <Link to="/roles/add"><FlatButton>Add Role</FlatButton></Link>
+        <Link to="/users"><FlatButton>Users</FlatButton></Link>
     </header>
 );

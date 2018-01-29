@@ -27,7 +27,7 @@ export default class RoleForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <TextField name="name" hintText="Role Name" onChange={this.handleChange} value={this.state.name}/>
+                    <TextField name="name" floatingLabelText="Role Name" onChange={this.handleChange} value={this.state.name}/>
                     <FlatButton type={"submit"}>Save</FlatButton>
                 </form>
             </div>

@@ -19,8 +19,8 @@ export default class RoleList extends Component {
             .then(data => this.setState({roles: data}));
     };
 
-    handleDelete = id => {
-        fetch(`${restHost}/roles?ID=${id}`, {
+    handleDelete = roleId => {
+        fetch(`${restHost}/roles?ID=${roleId}`, {
             method: 'delete'
         })
             .then(resp => {

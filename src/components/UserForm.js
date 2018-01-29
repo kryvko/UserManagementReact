@@ -5,12 +5,13 @@ import {restHost} from "../resources/properties";
 export default class UserForm extends Component {
 
     state = {
+        id: null,
         login: '',
         email: '',
         password: '',
         firstName: '',
         lastName: '',
-        roleId: '',
+        roleId: null,
         roles: []
     };
 
@@ -37,8 +38,12 @@ export default class UserForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const { login, email, password, firstName, lastName, roleId, roles } = this.state;
-        this.props.onSubmit({ login, email, password, firstName, lastName, role: roles.find( role => (role.id === roleId))})
+        const { id, login, email, password, firstName, lastName, roleId, roles } = this.state;
+        this.props.onSubmit({ id, login, email, password, firstName, lastName, role: roles.find( role => (role.id === roleId))})
+    };
+
+    handleSelectChange = (event, index, value) => {
+      this.setState({ roleId: value });
     };
 
     render() {
@@ -47,13 +52,13 @@ export default class UserForm extends Component {
         );
         return (
             <div>
-                <form onChange={this.handleChange}>
-                    <TextField name="login" value={this.state.login} hintText="Login"/><br/>
-                    <TextField name="email" value={this.state.email} hintText="Email"/><br/>
-                    <TextField name="password" value={this.state.password} hintText="Password"/><br/>
-                    <TextField name="firstName" value={this.state.firstName} hintText="First Name"/><br/>
-                    <TextField name="lastName" value={this.state.lastName} hintText="Last Name"/><br/>
-                    <SelectField name="roleId" hintText="Select Role" value={this.state.roleId}>
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+                    <TextField name="login" value={this.state.login} floatingLabelText="Login"/><br/>
+                    <TextField name="email" value={this.state.email} floatingLabelText="Email"/><br/>
+                    <TextField name="password" value={this.state.password} floatingLabelText="Password"/><br/>
+                    <TextField name="firstName" value={this.state.firstName} floatingLabelText="First Name"/><br/>
+                    <TextField name="lastName" value={this.state.lastName} floatingLabelText="Last Name"/><br/>
+                    <SelectField onChange={this.handleSelectChange} name="roleId" floatingLabelText="Select Role" value={this.state.roleId}>
                         {roles}
                     </SelectField><br/>
                     <FlatButton type="submit">Save</FlatButton>

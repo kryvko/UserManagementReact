@@ -19,9 +19,19 @@ export default class UserList extends Component {
             .then(data => this.setState({users: data}));
     };
 
+    handleDelete = userId => {
+        fetch(`${restHost}/users?ID=${userId}`, {
+            method: 'delete'})
+            .then(resp => {
+                if (resp.ok) {
+                    this.fetchAll();
+                }
+            })
+    }
+
     render() {
         let users = this.state.users.map(
-            user => <User user={user} key={user.id}/>
+            user => <User user={user} onDelete={this.handleDelete} key={user.id}/>
         );
         return (
             <div>

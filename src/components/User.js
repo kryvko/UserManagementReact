@@ -1,8 +1,8 @@
 import React from 'react';
-import { TableRow, TableRowColumn, FlatButton } from 'material-ui'
-import { Link } from 'react-router-dom';
+import {TableRow, TableRowColumn, FlatButton} from 'material-ui'
+import {Link} from 'react-router-dom';
 
-export const User = ({user}) => (
+export const User = ({user, onDelete}) => (
     <TableRow>
         <TableRowColumn>{user.id}</TableRowColumn>
         <TableRowColumn>{user.login}</TableRowColumn>
@@ -13,7 +13,7 @@ export const User = ({user}) => (
         <TableRowColumn>{user.role.name}</TableRowColumn>
         <TableRowColumn>
             <Link to={`/users/edit/${user.id}`}><FlatButton>Edit</FlatButton></Link>
-            <FlatButton>Delete</FlatButton>
+            <FlatButton onClick={() => onDelete(user.id)}>Delete</FlatButton>
         </TableRowColumn>
     </TableRow>
 );

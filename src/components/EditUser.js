@@ -17,11 +17,25 @@ export default class EditUser extends Component {
             .then(data => this.setState({ user: data }));
     }
 
+    handleSave = user => {
+        fetch(`${restHost}/users`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(resp => {
+                if (resp.ok) {
+                    this.setState({ isUpdated: true});
+                }
+            });
+    };
 
     render() {
         return (
             <div>
-                ${this.state.isUpdated ? <Redirect to="/users" /> : <UserForm user={this.state.user} />};
+                ${this.state.isUpdated ? <Redirect to="/users" /> : <UserForm user={this.state.user} onSubmit={this.handleSave} />};
             </div>
         );
     }

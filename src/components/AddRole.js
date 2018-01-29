@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Redirect } from  'react-router-dom'
+import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import RoleForm from './RoleForm'
-import { restHost } from "../resources/properties";
+import {restHost} from "../resources/properties";
 
 export default class AddRole extends Component {
 
@@ -18,7 +18,7 @@ export default class AddRole extends Component {
             body: JSON.stringify(role)
         })
             .then(resp => {
-                if(resp.ok) {
+                if (resp.ok) {
                     this.setState({isAdded: true})
                 }
             })
@@ -27,7 +27,7 @@ export default class AddRole extends Component {
     render() {
         return (
             <div>
-                {this.state.isAdded ? <Redirect to="/roles" /> : <RoleForm onSubmit={this.handleSave} />}
+                {this.state.isAdded ? <Redirect to="/roles"/> : <RoleForm onSubmit={this.handleSave}/>}
             </div>
         );
     };

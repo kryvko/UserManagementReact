@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 import RoleList from '../containers/role/RoleList';
 import AddRole from '../containers/role/AddRole';
 import EditRole from '../containers/role/EditRole';
-import UserList from './UserList'
-import EditUser from './EditUser';
-import AddUser from './AddUser';
+import UserList from '../containers/user/UserList'
+import AddUser from '../containers/user/AddUser';
+import EditUser from "../containers/user/EditUser";
 
 export const Main = () => (
     <main>

@@ -1,37 +1,22 @@
 import React, {Component} from 'react';
-import {restHost} from "../resources/properties";
-import {Table, TableHeader, TableHeaderColumn, TableBody, TableRow} from 'material-ui';
-import {User} from './User'
+import {connect} from 'react-redux';
+import {deleteUser, fetchAllUsers} from "../../actions/users";
+import {User} from "../../components/User";
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow} from "material-ui";
 
-export default class UserList extends Component {
-
-    state = {
-        users: []
-    };
+class UserList extends Component {
 
     componentDidMount() {
-        this.fetchAll();
-    };
-
-    fetchAll = () => {
-        fetch(`${restHost}/users`)
-            .then(resp => resp.json())
-            .then(data => this.setState({users: data}));
-    };
-
-    handleDelete = userId => {
-        fetch(`${restHost}/users?ID=${userId}`, {
-            method: 'delete'})
-            .then(resp => {
-                if (resp.ok) {
-                    this.fetchAll();
-                }
-            })
+        this.props.fetchAllUsers();
     }
 
+    handleDelete = id => {
+        this.props.deleteUser(id)
+    };
+
     render() {
-        let users = this.state.users.map(
-            user => <User user={user} onDelete={this.handleDelete} key={user.id}/>
+        let users = this.props.users.map(user =>
+            <User user={user} key={user.id} onDelete={this.handleDelete}/>
         );
         return (
             <div>
@@ -55,5 +40,10 @@ export default class UserList extends Component {
             </div>
         );
     }
-
 }
+
+const mapStateToProps = state => ({
+    users: state.userStore.users
+});
+
+export default connect(mapStateToProps, {fetchAllUsers, deleteUser})(UserList);

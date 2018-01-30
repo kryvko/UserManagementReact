@@ -18,7 +18,7 @@ class RoleForm extends Component {
             <div>
                 <Form onSubmit={this.props.handleSubmit}>
                     <div>
-                    <Field name="name" component={createTextField} lable="name" />
+                        <Field name="name" component={createTextField} lable="name"/>
                     </div>
                     <div>
                         <FlatButton primary={true} type={"submit"}>Save</FlatButton>

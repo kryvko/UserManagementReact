@@ -11,7 +11,7 @@ class RoleList extends Component {
     }
 
     handleDelete = id => {
-        this.props.deleteRole(id)
+        this.props.deleteRole(id);
     };
 
     render() {

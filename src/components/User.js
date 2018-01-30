@@ -12,8 +12,8 @@ export const User = ({user, onDelete}) => (
         <TableRowColumn>{user.lastName}</TableRowColumn>
         <TableRowColumn>{user.role.name}</TableRowColumn>
         <TableRowColumn>
-            <Link to={`/users/edit/${user.id}`}><FlatButton>Edit</FlatButton></Link>
-            <FlatButton onClick={() => onDelete(user.id)}>Delete</FlatButton>
+            <Link to={`/users/edit/${user.id}`}><FlatButton primary={true}>Edit</FlatButton></Link>
+            <FlatButton secondary={true} onClick={() => onDelete(user.id)}>Delete</FlatButton>
         </TableRowColumn>
     </TableRow>
 );

@@ -111,19 +111,20 @@ export const updateRole = (id, role) => {
             }),
             body: JSON.stringify(role)
         })
-            .then(resp => (resp.status === 200 ? dispatch(updateRoleSuccess(role)) : new Error()))
+            .then(resp => resp.json())
+            .then(data => dispatch(updateRoleSuccess(data)))
             .catch(error => dispatch(updateRoleFailure(error)))
     };
 };
 
 export const fetchRole = id => {
-  return dispatch => {
-      dispatch(fetchRoleRequest);
-      return fetch(`${restHost}/roles?ID=${id}`)
-          .then(resp => resp.json())
-          .then(data => dispatch(fetchRoleSuccess(data)))
-          .catch(error => dispatch(fetchRoleFailure(error)))
-  };
+    return dispatch => {
+        dispatch(fetchRoleRequest);
+        return fetch(`${restHost}/roles?ID=${id}`)
+            .then(resp => resp.json())
+            .then(data => dispatch(fetchRoleSuccess(data)))
+            .catch(error => dispatch(fetchRoleFailure(error)))
+    };
 };
 
 export const deleteRole = id => {
@@ -132,7 +133,8 @@ export const deleteRole = id => {
         return fetch(`${restHost}/roles?ID=${id}`, {
             method: 'delete'
         })
-            .then(resp => resp.status === 200 ? dispatch(deleteRoleSuccess(id)) : new Error())
+            .then(resp => resp.json())
+            .then(() => dispatch(deleteRoleSuccess(id)))
             .catch(error => dispatch(deleteRoleFailure(error)))
     };
 };

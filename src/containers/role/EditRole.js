@@ -18,7 +18,7 @@ class EditRole extends Component {
     handleSave = role => {
         const id = this.props.match.params.id;
         this.props.updateRole(id, role)
-            .then(resp => this.setState({ isUpdated: true}));
+            .then(() => this.setState({ isUpdated: true}));
     };
 
     render() {

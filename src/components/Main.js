@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import RoleList from './RoleList';
-import AddRole from './AddRole';
-import EditRole from './EditRole';
+import RoleList from '../containers/role/RoleList';
+import AddRole from '../containers/role/AddRole';
+import EditRole from '../containers/role/EditRole';
 import UserList from './UserList'
 import EditUser from './EditUser';
 import AddUser from './AddUser';

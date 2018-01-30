@@ -1,37 +1,21 @@
 import React, {Component} from 'react';
-import {Role} from './Role'
+import {Role} from '../../components/Role'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow} from 'material-ui'
-import {restHost} from "../resources/properties";
+import {fetchAllRoles, deleteRole} from "../../actions/roles";
+import {connect} from 'react-redux';
 
-
-export default class RoleList extends Component {
-    state = {
-        roles: []
-    };
+class RoleList extends Component {
 
     componentDidMount() {
-        this.fetchAll();
+        this.props.fetchAllRoles();
     }
 
-    fetchAll = () => {
-        fetch(`${restHost}/roles`)
-            .then(resp => resp.json())
-            .then(data => this.setState({roles: data}));
-    };
-
-    handleDelete = roleId => {
-        fetch(`${restHost}/roles?ID=${roleId}`, {
-            method: 'delete'
-        })
-            .then(resp => {
-                if (resp.ok) {
-                    this.fetchAll();
-                }
-            });
+    handleDelete = id => {
+        this.props.deleteRole(id)
     };
 
     render() {
-        let roles = this.state.roles.map(role =>
+        let roles = this.props.roles.map(role =>
             <Role role={role} key={role.id} onDelete={this.handleDelete}/>
         );
         return (
@@ -52,3 +36,9 @@ export default class RoleList extends Component {
         );
     }
 };
+
+const mapStateToProps = state => ({
+    roles: state.roleStore.roles
+});
+
+export default connect(mapStateToProps, {fetchAllRoles, deleteRole})(RoleList);

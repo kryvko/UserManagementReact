@@ -7,8 +7,8 @@ export const Role = ({role, onDelete}) => (
         <TableRowColumn>{role.id}</TableRowColumn>
         <TableRowColumn>{role.name}</TableRowColumn>
         <TableRowColumn>
-            <Link to={`/roles/edit/${role.id}`} ><FlatButton>Edit</FlatButton></Link>
-            <FlatButton onClick={() => onDelete(role.id)}>Delete</FlatButton>
+            <Link to={`/roles/edit/${role.id}`} ><FlatButton primary={true}>Edit</FlatButton></Link>
+            <FlatButton secondary={true} onClick={() => onDelete(role.id)}>Delete</FlatButton>
         </TableRowColumn>
     </TableRow>
 );

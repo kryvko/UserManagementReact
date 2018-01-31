@@ -85,7 +85,7 @@ export default (state = {users: [], isLoading: false, hasError: false, user: {}}
                 ...state,
                 isLoading: false,
                 hasError: false,
-                role: action.role
+                user: action.user
             }
         }
 
@@ -94,7 +94,7 @@ export default (state = {users: [], isLoading: false, hasError: false, user: {}}
                 ...state,
                 isLoading: false,
                 hasError: true,
-                role: {}
+                user: {}
             }
         }
 

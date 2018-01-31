@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import {Field, Form, reduxForm} from "redux-form";
-import {FlatButton, MenuItem, SelectField, TextField} from "material-ui";
+import {FlatButton, MenuItem} from "material-ui";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {fetchAllRoles} from "../../actions/roles";
-
-const createTextField = ({input, label, meta: {touched, error}}) => (
-    <TextField floatingLabelText={label} {...input} errorText={touched && error}/>
-);
+import {TextField, SelectField} from 'redux-form-material-ui'
 
 const validate = values => {
     const requiredField = [
@@ -16,7 +13,7 @@ const validate = values => {
         'password',
         'firstName',
         'lastName',
-        'roleId'
+        'role'
     ];
 
     const labels = {
@@ -25,7 +22,7 @@ const validate = values => {
         password: 'Password',
         firstName: 'First Name',
         lastName: 'Last Name',
-        roleId: 'Role'
+        role: 'Select Role'
     };
 
     let errors = {};
@@ -46,26 +43,31 @@ class UserForm extends Component {
 
 
     render() {
+        let roles = this.props.roles.map(role =>
+            <MenuItem value={role.id} key={role.id} primaryText={role.name}/>
+        );
         return (
             <div>
                 <Form onSubmit={this.props.handleSubmit}>
                     <div>
-                        <Field name='login' label='Login' component={createTextField}/>
+                        <Field name='login' hintText='Login' component={TextField}/>
                     </div>
                     <div>
-                        <Field name='email' lable='Email' component={createTextField}/>
+                        <Field name='email' hintText='Email' component={TextField}/>
                     </div>
                     <div>
-                        <Field name='password' lable='Password' component={createTextField}/>
+                        <Field name='password' hintText='Password' component={TextField}/>
                     </div>
                     <div>
-                        <Field name='firstName' lable='First Name' component={createTextField}/>
+                        <Field name='firstName' hintText='First Name' component={TextField}/>
                     </div>
                     <div>
-                        <Field name='lastName' lable='Last Name' component={createTextField}/>
+                        <Field name='lastName' hintText='Last Name' component={TextField}/>
                     </div>
                     <div>
-
+                        <Field name='role' component={SelectField} hintText='Select Role'>
+                            {roles}
+                        </Field>
                     </div>
                     <div>
                         <FlatButton primary={true} type='submit'>Save</FlatButton>

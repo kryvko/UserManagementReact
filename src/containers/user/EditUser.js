@@ -31,7 +31,7 @@ class EditUser extends Component {
 }
 
 const mapStateToProps = state => ({
-    users: this.userStore.users
+    users: state.userStore.users
 });
 
 export default connect(mapStateToProps, {fetchUser, updateUser})(EditUser);

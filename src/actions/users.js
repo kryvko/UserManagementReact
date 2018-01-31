@@ -123,7 +123,7 @@ export const fetchUser = id => {
         return fetch(`${restHost}/users?ID=${id}`)
             .then(resp => resp.json())
             .then(data => dispatch(fetchUserSuccess(data)))
-            .then(error => dispatch(fetchUserFailure(error)));
+            .catch(error => dispatch(fetchUserFailure(error)));
     }
 };
 

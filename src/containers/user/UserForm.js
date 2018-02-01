@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Field, Form, reduxForm} from "redux-form";
-import {FlatButton, MenuItem} from "material-ui";
+import {FlatButton} from "material-ui";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {fetchAllRoles} from "../../actions/roles";
-import {TextField, SelectField} from 'redux-form-material-ui'
+import {TextField} from 'redux-form-material-ui'
+import SmartSelectField from "../../components/SmartSelectField";
 
 const validate = values => {
     const requiredField = [
@@ -37,15 +37,7 @@ const validate = values => {
 
 class UserForm extends Component {
 
-    componentDidMount() {
-        this.props.fetchAllRoles();
-    }
-
-
     render() {
-        let roles = this.props.roles.map(role =>
-            <MenuItem value={role.id} key={role.id} primaryText={role.name}/>
-        );
         return (
             <div>
                 <Form onSubmit={this.props.handleSubmit}>
@@ -65,9 +57,7 @@ class UserForm extends Component {
                         <Field name='lastName' hintText='Last Name' component={TextField}/>
                     </div>
                     <div>
-                        <Field name='role' component={SelectField} hintText='Select Role'>
-                            {roles}
-                        </Field>
+                        <Field name='role' component={SmartSelectField}/>
                     </div>
                     <div>
                         <FlatButton primary={true} type='submit'>Save</FlatButton>
@@ -80,7 +70,7 @@ class UserForm extends Component {
 }
 
 UserForm = reduxForm({form: 'userForm', validate, enableReinitialize: true})(UserForm);
+
 export default connect(state => ({
-    initialValues: state.userStore.user,
-    roles: state.roleStore.roles
-}), {fetchAllRoles})(UserForm)
+    initialValues: state.userStore.user
+}))(UserForm)

@@ -10,11 +10,11 @@ class SmartSelectField extends Component {
     }
 
     render() {
-        const {input: {value, onChange}} = this.props;
+        const {input: {value: role, onChange}} = this.props;
         return (
             <div>
-                <SelectField value={value.id} hintText='Select Role' onChange={(event, index, value) => {
-                    onChange(this.props.roles.find(role => role.id === value))
+                <SelectField value={role.id} hintText='Select Role' onChange={(event, index, roleId) => {
+                    onChange(this.props.roles.find(role => role.id === roleId))
                 }}>
                     {this.props.roles.map(role =>
                         <MenuItem value={role.id} key={role.id} primaryText={role.name}/>)

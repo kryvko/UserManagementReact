@@ -1,1 +1,1 @@
-export const restHost = 'http://35.178.19.173:8080/UserManagement'; //REST Host address
+export const restHost = 'https://35.178.19.173:8443/UserManagement'; //REST Host address
